@@ -1,0 +1,20 @@
+.lista{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px}
+.item{display:flex; align-items:flex-start; gap:10px; background:var(--panel);
+  border:1px solid var(--borde); border-radius:var(--radio); padding:11px 12px;
+  box-shadow:var(--sombra)}
+.check{width:18px; height:18px; margin:3px 0 0; accent-color:var(--acento); flex:0 0 auto; cursor:pointer}
+.prio{width:4px; align-self:stretch; border-radius:4px; flex:0 0 auto}
+.prio.alta{background:#e5484d}
+.prio.media{background:#f5a524}
+.prio.baja{background:#3b82f6}
+.cuerpo{flex:1; min-width:0}
+.titulo{font-weight:600; word-break:break-word}
+.item.hecha .titulo{text-decoration:line-through; color:var(--suave)}
+.item.hecha{opacity:.7}
+.meta{display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; font-size:12.5px; color:var(--suave)}
+.tag{background:rgba(127,127,127,.13); border-radius:6px; padding:1px 7px}
+.tag.vencida{background:rgba(229,72,77,.16); color:#e5484d; font-weight:600}
+.notas{width:100%; white-space:pre-wrap; word-break:break-word; opacity:.85}
+.acciones{display:flex; gap:2px; flex:0 0 auto}
+.acciones button{background:transparent; border:none; padding:4px 6px; font-size:14px; opacity:.55}
+.acciones button:hover{opacity:1; background:rgba(127,127,127,.14)}

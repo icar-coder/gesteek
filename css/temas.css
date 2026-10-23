@@ -1,0 +1,4 @@
+html[data-tema="oscuro"]{
+  --bg:#0e1116; --panel:#171b21; --texto:#e6e9ee; --suave:#8b95a5;
+  --borde:#252b34; --sombra:0 1px 3px rgba(0,0,0,.5);
+}

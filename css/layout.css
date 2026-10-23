@@ -1,0 +1,24 @@
+.cabecera{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  padding:14px 18px; background:var(--panel);
+  border-bottom:1px solid var(--borde); position:sticky; top:0; z-index:20;
+}
+.marca{font-size:18px}
+.tabs{display:flex; gap:4px; flex:1; flex-wrap:wrap}
+.tabs button{
+  background:transparent; border:1px solid transparent; color:var(--suave);
+  padding:7px 12px; border-radius:var(--radio-sm);
+}
+.tabs button:hover{
+  background:rgba(127,127,127,.10); color:var(--texto);
+  border-color:transparent;
+}
+.tabs button.activo{background:rgba(59,130,246,.14); color:var(--acento); font-weight:600}
+.cabecera__acciones{display:flex; gap:4px}
+
+.vista{max-width:1700px; margin:0 auto; padding:22px 18px 60px}
+
+.aviso{
+  background:rgba(245,165,36,.16); border-bottom:1px solid rgba(245,165,36,.45);
+  padding:9px 18px; font-size:13px;
+}

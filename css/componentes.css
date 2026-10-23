@@ -1,0 +1,49 @@
+button{
+  cursor:pointer; border:1px solid var(--borde); background:var(--panel);
+  color:var(--texto); border-radius:var(--radio-sm); padding:7px 12px; transition:.15s;
+}
+button:hover{border-color:var(--acento)}
+button:active{transform:translateY(1px)}
+.icono{padding:7px 9px; line-height:1}
+.primario{background:var(--acento); border-color:var(--acento); color:#fff; font-weight:600}
+.primario:hover{filter:brightness(1.08)}
+
+/* checkbox y radio quedan fuera para no romper su render nativo */
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea{
+  font:inherit; color:var(--texto); background:var(--panel);
+  border:1px solid var(--borde); border-radius:var(--radio-sm);
+  padding:8px 10px; width:100%;
+}
+input:not([type="checkbox"]):not([type="radio"]):focus,
+select:focus,
+textarea:focus{
+  outline:none; border-color:var(--acento);
+  box-shadow:0 0 0 3px rgba(59,130,246,.22);
+}
+textarea{resize:vertical; min-height:70px}
+
+.barra{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:8px; margin-bottom:14px}
+@media(max-width:660px){.barra{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.barra{grid-template-columns:1fr}}
+
+.stats{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; font-size:13px; color:var(--suave)}
+.stats span{background:var(--panel); border:1px solid var(--borde); border-radius:20px; padding:3px 11px}
+
+.vacio{
+  text-align:center; color:var(--suave); padding:44px 14px;
+  border:1px dashed var(--borde); border-radius:var(--radio);
+}
+
+dialog{
+  border:none; border-radius:14px; padding:0; background:var(--panel); color:var(--texto);
+  width:min(460px,92vw); box-shadow:0 24px 70px rgba(0,0,0,.35);
+}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.form{padding:18px; display:flex; flex-direction:column; gap:13px}
+.campo{display:flex; flex-direction:column; gap:5px}
+.campo label{font-size:12px; font-weight:700; color:var(--suave);
+  text-transform:uppercase; letter-spacing:.05em}
+.fila2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.pie{display:flex; justify-content:flex-end; gap:8px; margin-top:2px}

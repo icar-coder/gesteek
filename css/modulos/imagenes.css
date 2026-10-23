@@ -1,0 +1,176 @@
+.imagenes__cab{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px;
+}
+.imagenes__contador{color:var(--suave); font-size:13px}
+.imagenes__progreso{color:var(--acento); font-size:13px; font-weight:600}
+
+/* ===== Galería ===== */
+.galeria{position:relative; width:100%}
+
+/* fallback sin Masonry.js: CSS multi-column */
+.galeria--cols{
+  column-count:4; column-gap:12px;
+}
+@media(max-width:900px){ .galeria--cols{column-count:3} }
+@media(max-width:640px){ .galeria--cols{column-count:2} }
+@media(max-width:400px){ .galeria--cols{column-count:1} }
+
+/* modo Masonry.js: el ancho lo aplica Masonry inline con columnWidthActual() */
+.galeria--masonry .card{
+  width: var(--col-width, 200px);   /* ← fallback si Masonry no lo pone */
+  margin-bottom: 8px;
+}
+
+/* ===== Card ===== */
+.card{
+  background:var(--panel);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  overflow:hidden;
+  box-shadow:var(--sombra);
+  transition:transform .15s, box-shadow .15s;
+  /* ⚠️ NO usar content-visibility aquí: rompe Masonry */
+}
+.card:hover{ transform:translateY(-2px); box-shadow:0 6px 22px rgba(0,0,0,.10) }
+.card.faltante{ opacity:.55; border-style:dashed }
+
+/* content-visibility SOLO en el modo fallback (sin Masonry) */
+.galeria--cols .card{
+  content-visibility: auto;
+  contain-intrinsic-size: auto 320px;
+  /* FIX: evita que una card se parta entre dos columnas */
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  /* FIX: separación vertical entre cards de la misma columna
+     (column-gap solo separa horizontalmente) */
+  margin-bottom: 12px;
+}
+
+/* reserva de altura exacta — cero saltos al cargar/descargar blobs */
+.card__media{
+  position:relative;
+  width:100%;
+  aspect-ratio: var(--ratio, 1);
+  background:rgba(127,127,127,.10);
+  overflow:hidden;
+}
+.card__media img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  cursor:zoom-in;
+  opacity:0;
+  transition:opacity .25s ease;
+}
+.card__media img[src]{ opacity:1 }
+
+/* texto de la card — una sola definición por selector (antes había dos
+   bloques y el segundo pisaba los valores compactos del primero) */
+.card__pie{
+  padding:6px 8px 4px;
+  font-size:12.5px;
+}
+.card__nombre{
+  font-weight:600;
+  font-size:12.5px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.card__meta{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  color:var(--suave);
+  font-size:11px;
+  margin-top:2px;
+}
+.card__notas{
+  padding:0 8px 8px;
+  font-size:11.5px;
+  color:var(--suave);
+  max-height:3.9em;
+  overflow:hidden;
+  white-space:pre-wrap;
+}
+
+/* ===== Sentinel (scroll infinito) ===== */
+.galeria__sentinel{
+  height:70px; margin-top:14px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--suave); font-size:13px; letter-spacing:.03em;
+}
+.galeria__sentinel.oculto{ display:none }
+
+/* spinner de carga */
+.galeria__sentinel::after{
+  content:'';
+  width:26px; height:26px;
+  border:3px solid var(--borde);
+  border-top-color:var(--acento);
+  border-radius:50%;
+  animation:giro .8s linear infinite;
+}
+
+/* estado final */
+.galeria__sentinel.fin::after{
+  content:'— Fin de la galería —';
+  animation:none;
+  border:none;
+  width:auto; height:auto;
+  opacity:.6;
+}
+@keyframes giro{ to { transform:rotate(360deg) } }
+
+/* ===== Detalle ===== */
+.detalle{
+  border:none; border-radius:14px; padding:0; background:var(--panel); color:var(--texto);
+  width:min(1080px, 94vw); max-height:92vh; overflow:hidden;
+  box-shadow:0 24px 70px rgba(0,0,0,.4);
+}
+.detalle::backdrop{ background:rgba(0,0,0,.55) }
+.detalle__grid{
+  display:grid; grid-template-columns: 1.3fr 1fr; gap:0; max-height:92vh;
+}
+@media(max-width:800px){ .detalle__grid{grid-template-columns:1fr} }
+
+.detalle__izq{
+  padding:18px; overflow:auto; border-right:1px solid var(--borde);
+  background:rgba(127,127,127,.04);
+}
+.detalle__der{
+  padding:18px; overflow:auto; display:flex; flex-direction:column; gap:13px;
+}
+.detalle__path{ font-size:12px; color:var(--suave); margin:4px 0 12px; word-break:break-all }
+.detalle__preview img{
+  display:block; max-width:100%; max-height:70vh; margin:0 auto;
+  border-radius:10px; box-shadow:var(--sombra);
+}
+
+.detalle__enlaces{
+  display:flex; flex-wrap:wrap; gap:6px; min-height:28px;
+  border:1px dashed var(--borde); border-radius:8px; padding:6px;
+}
+.detalle__vacio{ color:var(--suave); font-size:12.5px; padding:4px 2px }
+
+.chip{
+  display:inline-flex; align-items:center; gap:4px; padding:3px 6px 3px 9px;
+  background:rgba(59,130,246,.14); color:var(--acento);
+  border-radius:20px; font-size:12.5px; font-weight:600;
+}
+.chip__x{
+  background:transparent; border:none; color:inherit; cursor:pointer;
+  padding:0 3px; font-size:14px; line-height:1; opacity:.7;
+}
+.chip__x:hover{ opacity:1 }
+
+.detalle__sugerencias{
+  display:flex; flex-direction:column; gap:4px; max-height:160px; overflow:auto;
+}
+.sug{
+  text-align:left; padding:6px 9px; font-size:13px; background:transparent;
+  border:1px solid var(--borde);
+}
+.sug:hover{ border-color:var(--acento); background:rgba(59,130,246,.06) }
