@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="claro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#3b82f6">
+
+<title>Mi Gestor</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/temas.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/componentes.css">
+<link rel="stylesheet" href="css/modulos/tareas.css">
+<link rel="stylesheet" href="css/modulos/imagenes.css">
+<link rel="stylesheet" href="css/modulos/gastos.css">
+</head>
+<body>
+
+<header class="cabecera">
+  <h1 class="marca">📋 Mi Gestor</h1>
+  <nav class="tabs" id="tabs"><!-- se llena solo --></nav>
+  <div class="cabecera__acciones">
+    <button id="btnTema" class="icono" title="Tema">🌙</button>
+    <button id="btnExportar" class="icono" title="Exportar todo (JSON)">⬇️</button>
+    <button id="btnImportar" class="icono" title="Importar (JSON)">⬆️</button>
+    <input type="file" id="fileInput" accept=".json,application/json" hidden>
+  </div>
+</header>
+
+<div id="aviso" class="aviso" hidden></div>
+
+<main id="vista" class="vista"><!-- el módulo activo se monta aquí --></main>
+
+<!-- Núcleo -->
+<script src="js/nucleo/util.js"></script>
+<script src="js/nucleo/dom.js"></script>
+<script src="js/nucleo/almacen.js"></script>
+<script src="js/nucleo/app.js"></script>
+<script src="js/nucleo/blobstore.js"></script>
+
+<!-- Chart.js (UMD, expone window.Chart) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<!-- Módulos -->
+<script src="js/modulos/tareas.js"></script>
+<script src="js/modulos/imagenes.js"></script>
+<script src="js/modulos/gastos.js"></script>
+<script src="js/vendor/masonry.pkgd.min.js" onerror="window.__sinMasonry=true"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(registration => {
+          console.log('ServiceWorker registrado con éxito:', registration.scope);
+        })
+        .catch(error => {
+          console.error('Fallo al registrar el ServiceWorker:', error);
+        });
+    });
+  }
+</script>
+<script>Gestor.app.arrancar();</script>
+</body>
+</html>
